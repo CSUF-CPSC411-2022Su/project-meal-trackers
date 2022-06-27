@@ -11,6 +11,7 @@ struct SearchView: View {
     @StateObject var finder = MealFinder()
     @State var crosswalkname: String = ""
     @StateObject var history = SearchHistory()
+    @EnvironmentObject var appHistory : IntakeHistory
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -52,7 +53,13 @@ struct SearchView: View {
                     Text("Fat : \(finder.ResultFat, specifier: "%.1f")")
                     Spacer()
                     Button(action: {
-                    
+                        var foundFood = Food()
+                        foundFood.name = finder.firstFoundName
+                        foundFood.calories = String(finder.ResultCalories)
+                        foundFood.protein = String(finder.ResultProtein)
+                        foundFood.carbohydrates = String(finder.ResultCarbohydrates)
+                        foundFood.fat = String(finder.ResultFat)
+                        appHistory.foodHistory[0].foodEaten.append(foundFood)
                     }) {
                         Text("Add to Journal")
                     }

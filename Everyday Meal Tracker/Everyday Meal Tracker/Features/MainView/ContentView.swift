@@ -9,7 +9,7 @@ import SwiftUI
 
 enum Screens {
     case dashboard
-    case journal
+    case search
 }
 
 struct ContentView: View {
@@ -21,6 +21,8 @@ struct ContentView: View {
                 switch currentView {
                     case .dashboard:
                     DashboardView()
+                case .search:
+                    SearchView()
                     default:
                         DashboardView()
                 }
@@ -29,7 +31,7 @@ struct ContentView: View {
                     VStack {
                         Spacer()
                         Button {
-                            currentView = .journal
+                            currentView = .search
                         } label: {
                             Image(systemName: "magnifyingglass")
                                 .imageScale(.large)
